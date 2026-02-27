@@ -20,26 +20,37 @@
       justify-content: center; /* vertical centering */
       align-items: center;     /* horizontal centering */
       text-align: center;
-      padding: 0 20px;
+      padding: 0 10px;
     }
 
+    /* Title huge and responsive */
     h1 {
-      font-size: 50px;
+      font-size: 12vw;
       margin-bottom: 10px;
-      text-shadow: 2px 2px 4px #000;
+      text-shadow: 3px 3px 6px #000;
     }
 
     p {
-      font-size: 20px;
+      font-size: 5vw;
+      margin-bottom: 10px;
     }
 
+    /* Big Sorting Hat image */
+    #sorting-hat-img {
+      width: 70vw;
+      max-width: 300px;
+      height: auto;
+      margin-top: 10px;
+    }
+
+    /* Smaller button so house dominates */
     button {
-      padding: 15px 40px;
+      font-size: 6vw;
+      padding: 15px 30px;
       margin-top: 30px;
-      font-size: 22px;
       cursor: pointer;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       background-color: #6b4f2a;
       color: #f0e6d2;
       transition: 0.2s;
@@ -55,19 +66,27 @@
       align-items: center;
     }
 
-    /* Result box */
+    /* Result box — huge and dominating */
     #result {
       display: none; /* hidden initially */
       margin-top: 30px;
-      font-size: 28px;
       font-weight: bold;
-      padding: 15px;
-      border-radius: 10px;
-      min-width: 220px;
+      padding: 25px;
+      border-radius: 12px;
+      min-width: 70vw;
       text-align: center;
       color: #f0e6d2;
       background-color: rgba(0,0,0,0.5);
-      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+      word-wrap: break-word;
+      font-size: 12vw;
+    }
+
+    /* Smaller description under house name */
+    #result small {
+      font-size: 0.6em;
+      display: block;
+      margin-top: 5px;
     }
 
     /* Magical reveal animation */
@@ -82,21 +101,17 @@
       border: 2px solid currentColor;
     }
 
-    img {
-      margin-top: 15px;
-    }
-
-    /* Responsive layout for phones */
-    @media (max-width: 500px) {
-      h1 { font-size: 36px; }
-      button { font-size: 18px; padding: 12px 30px; }
-      #result { font-size: 22px; min-width: 180px; }
+    /* Responsive tweaks for very small phones */
+    @media (max-width: 400px) {
+      h1 { font-size: 14vw; }
+      button { font-size: 8vw; padding: 12px 25px; }
+      #result { font-size: 14vw; min-width: 70vw; }
     }
   </style>
 </head>
 <body>
-  <h1>The Sorting Hat</h1>
-  <img src="https://github.com/famnbr-cmd/sorting-hat/blob/main/SortingHat.png?raw=true" alt="Sorting Hat" width="150">
+  <h1>🧙 The Sorting Hat</h1>
+  <img id="sorting-hat-img" src="https://raw.githubusercontent.com/famnbr-cmd/sorting-hat/main/sorting-hat.png" alt="Sorting Hat">
   <p>Tap the button to discover your Hogwarts House!</p>
 
   <div id="sorting-container">
@@ -119,9 +134,9 @@
       resultDiv.style.color = (choice.name === "Hufflepuff") ? "#000" : "#f0e6d2";
       resultDiv.style.display = "inline-block";
 
-      // Trigger animation
+      // Trigger magical animation
       resultDiv.classList.remove("show");
-      void resultDiv.offsetWidth; // reflow to restart animation
+      void resultDiv.offsetWidth; // reflow
       resultDiv.classList.add("show");
     }
   </script>
