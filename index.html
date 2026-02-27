@@ -4,33 +4,63 @@
   <title>Sorting Hat</title>
   <style>
     body {
-      font-family: Georgia, serif;
+      font-family: "Georgia", serif;
       text-align: center;
-      background: #111;
+      background: url('https://i.imgur.com/3Nn4Y3K.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: #f0e6d2;
       padding-top: 60px;
     }
-    button {
-      padding: 15px 30px;
-      margin-top: 30px;
+    h1 {
+      font-size: 50px;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px #000;
+    }
+    p {
       font-size: 20px;
+    }
+    button {
+      padding: 15px 40px;
+      margin-top: 30px;
+      font-size: 22px;
       cursor: pointer;
       border: none;
       border-radius: 8px;
+      background-color: #6b4f2a;
+      color: #f0e6d2;
+      box-shadow: 2px 2px 6px #000;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 28px;
+      font-weight: bold;
+      padding: 15px;
+      border-radius: 10px;
+      display: inline-block;
+      min-width: 220px;
     }
   </style>
 </head>
 <body>
   <h1>🧙 The Sorting Hat</h1>
+  <img src="https://i.imgur.com/9R5yC9K.png" alt="Sorting Hat" width="150">
   <p>Tap the button to discover your Hogwarts House!</p>
   <button onclick="sortHouse()">Sort Me!</button>
-  <h2 id="result"></h2>
+  <div id="result"></div>
 
   <script>
     function sortHouse() {
-      const houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"];
+      const houses = [
+        {name: "Gryffindor", color: "#7F0909", emoji: "🦁"},
+        {name: "Slytherin", color: "#0D6217", emoji: "🐍"},
+        {name: "Ravenclaw", color: "#000A90", emoji: "🦅"},
+        {name: "Hufflepuff", color: "#EEE117", emoji: "🦡"}
+      ];
       const choice = houses[Math.floor(Math.random() * houses.length)];
-      document.getElementById("result").innerText = "You are in " + choice + "!";
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = `${choice.emoji} You are in ${choice.name}!`;
+      resultDiv.style.backgroundColor = choice.color;
+      resultDiv.style.color = (choice.name === "Hufflepuff") ? "#000" : "#f0e6d2";
     }
   </script>
 </body>
