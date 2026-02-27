@@ -6,19 +6,23 @@
     body {
       font-family: "Georgia", serif;
       text-align: center;
-      background: url('https://images.pexels.com/photos/96428/pexels-photo-96428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed;
+      background: url('https://images.pexels.com/photos/235985/pexels-photo-235985.jpeg') no-repeat center center fixed;
       background-size: cover;
       color: #f0e6d2;
-      padding-top: 60px;
+      padding-top: 50px;
+      margin: 0;
     }
+
     h1 {
       font-size: 50px;
       margin-bottom: 10px;
       text-shadow: 2px 2px 4px #000;
     }
+
     p {
       font-size: 20px;
     }
+
     button {
       padding: 15px 40px;
       margin-top: 30px;
@@ -28,39 +32,68 @@
       border-radius: 8px;
       background-color: #6b4f2a;
       color: #f0e6d2;
-      box-shadow: 2px 2px 6px #000;
+      transition: 0.2s;
     }
+
+    button:hover {
+      background-color: #8c5e35;
+    }
+
+    #sorting-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     #result {
+      display: none; /* hidden initially */
       margin-top: 30px;
       font-size: 28px;
       font-weight: bold;
       padding: 15px;
       border-radius: 10px;
-      display: inline-block;
       min-width: 220px;
+      background-color: rgba(0,0,0,0.5);
+      color: #f0e6d2;
+      text-align: center;
+    }
+
+    img {
+      margin-top: 15px;
+    }
+
+    /* Responsive layout for phones */
+    @media (max-width: 500px) {
+      h1 { font-size: 36px; }
+      button { font-size: 18px; padding: 12px 30px; }
+      #result { font-size: 22px; min-width: 180px; }
     }
   </style>
 </head>
 <body>
-  <h1>🧙 The Sorting Hat</h1>
-  <img src="https://i.imgur.com/9R5yC9K.png" alt="Sorting Hat" width="150">
+  <h1>The Sorting Hat</h1>
+  <img src="https://static.wikia.nocookie.net/harrypotter/images/6/62/Sorting_Hat.png/revision/latest/scale-to-width-down/1000?cb=20161120072849" alt="Sorting Hat" width="150">
   <p>Tap the button to discover your Hogwarts House!</p>
-  <button onclick="sortHouse()">Sort Me!</button>
-  <div id="result"></div>
+
+  <div id="sorting-container">
+    <button onclick="sortHouse()">Sort Me!</button>
+    <div id="result"></div>
+  </div>
 
   <script>
     function sortHouse() {
       const houses = [
-        {name: "Gryffindor", color: "#7F0909", emoji: "🦁"},
-        {name: "Slytherin", color: "#0D6217", emoji: "🐍"},
-        {name: "Ravenclaw", color: "#000A90", emoji: "🦅"},
-        {name: "Hufflepuff", color: "#EEE117", emoji: "🦡"}
+        {name: "Gryffindor", color: "rgba(127, 9, 9, 0.7)", emoji: "🦁"},
+        {name: "Slytherin", color: "rgba(13, 98, 23, 0.7)", emoji: "🐍"},
+        {name: "Ravenclaw", color: "rgba(0, 10, 144, 0.7)", emoji: "🦅"},
+        {name: "Hufflepuff", color: "rgba(238, 225, 23, 0.7)", emoji: "🦡"}
       ];
       const choice = houses[Math.floor(Math.random() * houses.length)];
       const resultDiv = document.getElementById("result");
       resultDiv.innerHTML = `${choice.emoji} You are in ${choice.name}!`;
       resultDiv.style.backgroundColor = choice.color;
       resultDiv.style.color = (choice.name === "Hufflepuff") ? "#000" : "#f0e6d2";
+      resultDiv.style.display = "inline-block"; // show it now
     }
   </script>
 </body>
