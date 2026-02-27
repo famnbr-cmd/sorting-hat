@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sorting Hat</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      text-align: center;
+      background: #111;
+      color: #f0e6d2;
+      padding-top: 60px;
+    }
+    button {
+      padding: 15px 30px;
+      margin-top: 30px;
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧙 The Sorting Hat</h1>
+  <p>Tap the button to discover your Hogwarts House!</p>
+  <button onclick="sortHouse()">Sort Me!</button>
+  <h2 id="result"></h2>
+
+  <script>
+    function sortHouse() {
+      const houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"];
+      const choice = houses[Math.floor(Math.random() * houses.length)];
+      document.getElementById("result").innerText = "You are in " + choice + "!";
+    }
+  </script>
+</body>
+</html>
