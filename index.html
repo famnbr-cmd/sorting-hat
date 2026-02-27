@@ -3,14 +3,24 @@
 <head>
   <title>Sorting Hat</title>
   <style>
+    /* Full-screen layout */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
     body {
       font-family: "Georgia", serif;
-      text-align: center;
       background: url('https://images.pexels.com/photos/235985/pexels-photo-235985.jpeg') no-repeat center center fixed;
       background-size: cover;
       color: #f0e6d2;
-      padding-top: 50px;
-      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* vertical centering */
+      align-items: center;     /* horizontal centering */
+      text-align: center;
+      padding: 0 20px;
     }
 
     h1 {
@@ -45,6 +55,7 @@
       align-items: center;
     }
 
+    /* Result box */
     #result {
       display: none; /* hidden initially */
       margin-top: 30px;
@@ -53,9 +64,22 @@
       padding: 15px;
       border-radius: 10px;
       min-width: 220px;
-      background-color: rgba(0,0,0,0.5);
-      color: #f0e6d2;
       text-align: center;
+      color: #f0e6d2;
+      background-color: rgba(0,0,0,0.5);
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+
+    /* Magical reveal animation */
+    @keyframes revealHouse {
+      0% {opacity: 0; transform: scale(0.5) translateY(-20px);}
+      100% {opacity: 1; transform: scale(1) translateY(0);}
+    }
+
+    #result.show {
+      animation: revealHouse 0.8s ease forwards;
+      box-shadow: 0 0 20px currentColor, 0 0 40px currentColor inset;
+      border: 2px solid currentColor;
     }
 
     img {
@@ -72,7 +96,7 @@
 </head>
 <body>
   <h1>The Sorting Hat</h1>
-  <img src="https://static.wikia.nocookie.net/harrypotter/images/6/62/Sorting_Hat.png/revision/latest/scale-to-width-down/1000?cb=20161120072849" alt="Sorting Hat" width="150">
+  <img src="https://github.com/famnbr-cmd/sorting-hat/blob/main/SortingHat.png?raw=true" alt="Sorting Hat" width="150">
   <p>Tap the button to discover your Hogwarts House!</p>
 
   <div id="sorting-container">
@@ -83,17 +107,22 @@
   <script>
     function sortHouse() {
       const houses = [
-        {name: "Gryffindor", color: "rgba(127, 9, 9, 0.7)", emoji: "🦁"},
-        {name: "Slytherin", color: "rgba(13, 98, 23, 0.7)", emoji: "🐍"},
-        {name: "Ravenclaw", color: "rgba(0, 10, 144, 0.7)", emoji: "🦅"},
-        {name: "Hufflepuff", color: "rgba(238, 225, 23, 0.7)", emoji: "🦡"}
+        {name: "Gryffindor", color: "rgba(127, 9, 9, 0.7)", emoji: "🦁", description: "Brave, daring, and chivalrous."},
+        {name: "Slytherin", color: "rgba(13, 98, 23, 0.7)", emoji: "🐍", description: "Cunning, ambitious, and resourceful."},
+        {name: "Ravenclaw", color: "rgba(0, 10, 144, 0.7)", emoji: "🦅", description: "Wise, creative, and intelligent."},
+        {name: "Hufflepuff", color: "rgba(238, 225, 23, 0.7)", emoji: "🦡", description: "Loyal, patient, and fair."}
       ];
       const choice = houses[Math.floor(Math.random() * houses.length)];
       const resultDiv = document.getElementById("result");
-      resultDiv.innerHTML = `${choice.emoji} You are in ${choice.name}!`;
+      resultDiv.innerHTML = `${choice.emoji} You are in ${choice.name}!<br><small>${choice.description}</small>`;
       resultDiv.style.backgroundColor = choice.color;
       resultDiv.style.color = (choice.name === "Hufflepuff") ? "#000" : "#f0e6d2";
-      resultDiv.style.display = "inline-block"; // show it now
+      resultDiv.style.display = "inline-block";
+
+      // Trigger animation
+      resultDiv.classList.remove("show");
+      void resultDiv.offsetWidth; // reflow to restart animation
+      resultDiv.classList.add("show");
     }
   </script>
 </body>
